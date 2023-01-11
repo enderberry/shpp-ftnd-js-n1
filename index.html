@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+    <script src="script.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .loading:before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px dashed #000;
+            animation: rotate infinite linear 2s;
+        }
+        .abs-top-right{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: -apple-system, Calibri, Arial, sans-serif;
+        }
+        .block-row {
+            display: flex;
+        }
+        .square {
+            width: 100px;
+            height: 100px;
+            margin: 2px;
+        }
+        .square-small {
+            width: 50px;
+            height: 50px;
+        }
+        .black-square {
+            background: #000;
+        }
+        .yellow-square {
+            background: #fc0;
+        }
+        .red-square {
+            background: #f00;
+        }
+        .green-rect {
+            width: 50px;
+            height: 20px;
+            background: #0c0;
+            margin: 2px;
+        }
+        .img-container img {
+            border: 1px solid #000;
+        }
+        .cus-input {
+            width: 150px;
+            height: 30px;
+            border: 1px solid #000;
+            margin: 2px;
+            outline: none;
+        }
+        .cus-input:focus {
+            outline: 1px solid #000;
+        }
+        .btn-scroll-up {
+            --mg: 10px;
+            position: fixed;
+            bottom: var(--mg);
+            right: var(--mg);
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 15%;
+            background: #faa;
+            color: #fff;
+            animation: color-rotate infinite linear 1s;
+            transition-duration: 0.3s;
+            cursor: pointer;
+        }
+        .btn-scroll-up-hidden {
+            transform: translateY(calc(100% + var(--mg)));
+        }
+        .border-block {
+            border: 1px solid #000;
+            min-width: 100px;
+            min-height: 100px;
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .border-block .border-block {
+            margin: 50px;
+        }
+        .file-dnd {
+            --bxsh: 0 0 10px;
+            width: 200px;
+            height: 40px;
+            border-radius: 20px;
+            box-shadow: var(--bxsh) rgba(0, 0, 0, 0.25);
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .file-dnd.selected {
+            box-shadow: var(--bxsh) rgba(0, 200, 0, 0.7);
+        }
+        .file-dnd.over {
+            box-shadow: var(--bxsh) rgba(0, 0, 255, 0.5);
+        }
+        .file-dnd-input {
+            opacity: 0;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: pointer;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes color-rotate {
+            from {
+                filter: hue-rotate(0deg);
+            }
+            to {
+                filter: hue-rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="top"></div>
+
+<div class="block-row">
+    <div class="black-square square"></div>
+    <div class="black-square square"></div>
+    <div class="black-square square"></div>
+    <div class="black-square square"></div>
+    <div class="black-square square"></div>
+</div>
+<button id="btn-remove-1">Remove with CSS</button>
+<button id="btn-remove-2">Remove with JS</button>
+<button id="btn-remove-3">Toggle with JS+CSS</button><br>
+<input type="text" id="input-multi" placeholder="CSS Selector...">
+<button id="btn-multi">Button</button>
+
+<div class="block-row">
+    <div id="yellow-square" class="yellow-square square"></div>
+    <div id="red-square" class="red-square square square-small hidden"></div>
+    <div id="green-rect" class="green-rect hidden"></div>
+</div>
+
+<textarea id="input-link" placeholder="Links (split by new line)..." cols="35" rows="6"></textarea>
+<button id="btn-link">Get</button>
+<div id="img-container" class="img-container"></div>
+
+<div class="abs-top-right">
+    <p id="mouse-coords">[mouse]</p>
+    <p id="browser-lang"></p>
+    <p id="geo-coords" class="loading">[geo]</p>
+</div>
+
+<div id="cus-input-1" class="cus-input" contenteditable></div>
+<div id="cus-input-2" class="cus-input" contenteditable></div>
+<div id="cus-input-3" class="cus-input" contenteditable></div>
+
+<button class="btn-scroll-up btn-scroll-up-hidden" id="btn-scroll-up">To Top</button>
+
+<div class="block-row">
+    <div class="border-block" id="border-block-1">
+        <div class="border-block" id="border-block-2"></div>
+    </div>
+</div>
+
+<button id="btn-fullscreen-block">Fullscreen block</button>
+
+<form id="no-upd-form">
+    <button type="submit">GO</button>
+</form>
+
+<p>Select file:</p>
+<div class="file-dnd">
+    <input type="file" id="file-dnd" class="file-dnd-input">
+</div>
+
+<div style="height: 111vh"></div>
+
+</body>
+</html>
